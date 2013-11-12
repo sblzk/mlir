@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: sigproc-sp.aux
+The style file: abbrv.bst
+Database file #1: sigproc-sp.bib
+Warning--can't use both volume and number fields in rl
+You've used 6 entries,
+            2118 wiz_defined-function locations,
+            534 strings with 4836 characters,
+and the built_in function-call counts, 2513 in all, are:
+= -- 264
+> -- 92
+< -- 5
++ -- 36
+- -- 30
+* -- 157
+:= -- 379
+add.period$ -- 22
+call.type$ -- 6
+change.case$ -- 32
+chr.to.int$ -- 0
+cite$ -- 7
+duplicate$ -- 114
+empty$ -- 209
+format.name$ -- 30
+if$ -- 567
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 7
+newline$ -- 33
+num.names$ -- 12
+pop$ -- 45
+preamble$ -- 1
+purify$ -- 27
+quote$ -- 0
+skip$ -- 85
+stack$ -- 0
+substring$ -- 169
+swap$ -- 45
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 22
+warning$ -- 1
+while$ -- 26
+width$ -- 7
+write$ -- 72
+(There was 1 warning)
