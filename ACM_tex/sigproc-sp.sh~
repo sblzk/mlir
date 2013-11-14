@@ -1,0 +1,4 @@
+latex sigproc-sp.tex
+bibtex sigproc-sp
+latex sigproc-sp.tex
+latex sigproc-sp.tex
