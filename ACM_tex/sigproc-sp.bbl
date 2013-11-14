@@ -1,5 +1,22 @@
 \begin{thebibliography}{1}
 
+\bibitem{broder}
+A.~Broder.
+\newblock A taxonomy of web search.
+\newblock In {\em ACM Sigir forum}, volume~36, pages 3--10. ACM, 2002.
+
+\bibitem{guo1}
+F.~Guo, C.~Liu, A.~Kannan, T.~Minka, M.~Taylor, Y.-M. Wang, and C.~Faloutsos.
+\newblock Click chain model in web search.
+\newblock In {\em Proceedings of the 18th international conference on World
+  wide web}, pages 11--20. ACM, 2009.
+
+\bibitem{guo2}
+F.~Guo, C.~Liu, and Y.~M. Wang.
+\newblock Efficient multiple-click models in web search.
+\newblock In {\em Proceedings of the Second ACM International Conference on Web
+  Search and Data Mining}, pages 124--131. ACM, 2009.
+
 \bibitem{hofmann}
 K.~Hofmann, S.~Whiteson, and M.~de~Rijke.
 \newblock Balancing exploration and exploitation in listwise and pairwise
