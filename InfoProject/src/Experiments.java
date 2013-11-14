@@ -7,7 +7,8 @@ public class Experiments {
 	
 	public static void main(String[] args)throws IOException {
 		
-		runFullPairwiseBaseline("/host/TREC/TD2003/All/TD2003.txt");
+		runFullPairwiseBaseline("./host/TREC/TD2003/Data/All/TD2003.txt");
+//		runFullListwiseBaseline("./host/TREC/TD2003/Data/All/TD2003.txt");
 	}
 	
 	//our sanity check: do the numbers look like those in Table 2?
@@ -26,7 +27,36 @@ public class Experiments {
 		
 		HashSet<Integer> queries=new HashSet<Integer>(data.queryMap.keySet());
 		for(int query: queries){
-			ArrayList<Integer> rankedList=p.returnRankedList(query);
+			ArrayList<Integer> rankedList=p.returnRankedList(query);		//here?
+			Metrics m=new Metrics(data,query,rankedList);
+			ndcg+=m.NDCG(10);
+			precision+=m.Precision(10);
+			ap+=m.AP();
+		}
+		ndcg/=queries.size();
+		precision/=queries.size();
+		ap/=queries.size();
+		
+		System.out.printf("NDCG@10: %f  Precision@10:  %f  MAP:  %f",ndcg,precision,ap);
+		
+	}
+	
+	public static void runFullListwiseBaseline(String inputfile)throws IOException{
+		QRels data=new QRels(inputfile);
+		ClickModel click=new ClickModel("perfect");
+		int featsize=44;
+		Listwise l=new Listwise(data,featsize,click);						//need
+		System.out.println(l.weight);
+		l.runBaseline();													//need
+		System.out.println(l.weight);
+		
+		double ndcg=0;
+		double precision=0;
+		double ap=0;
+		
+		HashSet<Integer> queries=new HashSet<Integer>(data.queryMap.keySet());
+		for(int query: queries){
+			ArrayList<Integer> rankedList=l.returnRankedList(query);
 			Metrics m=new Metrics(data,query,rankedList);
 			ndcg+=m.NDCG(10);
 			precision+=m.Precision(10);

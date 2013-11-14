@@ -83,7 +83,6 @@ public class Pairwise {
 			if(computeDotProduct(diff)<1.0)
 				nextweight=sumVectors(weight,MultMinus(diff,null,eta),MultMinus(weight,null,-1.0*eta*lambda));
 			
-			
 		}
 		weight=new ArrayList<Double>(nextweight);
 	}
