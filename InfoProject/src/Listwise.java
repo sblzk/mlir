@@ -91,6 +91,7 @@ public class Listwise {
 			//step 4.b: generate sorted list based on these scores
 			ArrayList<Integer> exploratoryList=constructFullSortedList(exploratoryscores);
 			
+			//step 5: perform interleaving of lists
 			ArrayList<Integer> balancedList = balancedInterleave(sortedList, exploratoryList);
 
 			//step 6-8: assuming click model on first ten entries, get labeled triples
@@ -109,18 +110,25 @@ public class Listwise {
 			ArrayList<Integer> nextList = new ArrayList<Integer>();
 			
 			if(nextList == exploratoryList)
-				if(previousWeights.get(1).size()>20)
-					for(int i;i<20;i++){
-						previousWeights.get(i) = previousWeights.get(i+1);
-					}
-			listTranspose(previousWeights);			//have to generate this guy - sure there's something online
-			previousWeights.add(weight2);			//also have to finish config the way it removes old lists
+				if(previousWeights.size()>=20)
+					previousWeights.remove(0);	//this should remove the oldest value	
+				else	
 					continue;
+				previousWeights.add(weight2);
 		}
-			
-		//step 12 not explicit: the final weight vector should be in 'weight'
-	}
+	}	
 	
+	public ArrayList<ArrayList> listTranspose(ArrayList<ArrayList> inputList) {
+		ArrayList<ArrayList> table = new ArrayList<ArrayList>();
+		for(int i=0;i<inputList.size();i++){
+			List<Integer> iValue = inputList.get(i);	//1, 2, 3, 4, ..., 43, 44
+			for(int j=0;j<iValue.size();j++){
+				table.get(j).add(iValue.get(j));		//hope this works...
+		}
+		}
+		return table;
+	    }
+
 	//will use current weight to return a ranked list for this query
 	public ArrayList<Integer> returnRankedList(int query){
 		HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>();
