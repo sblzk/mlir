@@ -77,7 +77,7 @@ public class Listwise {
 			//step 4: set w'_t = w_t + delta*unitvector
 			for(int i=0; i<unitvector.size(); i++){
 				if(previousWeights.size()>0)
-					weight2.add(weight.get(i) + sum(previousWeights.get(i))/(previousWeights.get(i).size()) + unitvector.get(i)/(previousWeights.get(i).size()));
+					weight2.add(weight.get(i) + sum(listTranspose(previousWeights).get(i))/(listTranspose(previousWeights).get(i).size()) + unitvector.get(i)/(listTranspose(previousWeights).get(i).size()));
 				weight2.add(weight.get(i) + unitvector.get(i));
 			}	//note: the previous line does not consider sigma but rather the size of the previousWeights matrix.  some discussion to be had here...
 			
@@ -91,7 +91,7 @@ public class Listwise {
 			//step 4.b: generate sorted list based on these scores
 			ArrayList<Integer> exploratoryList=constructFullSortedList(exploratoryscores);
 			
-			//step 5: perform interleaving of lists
+			//step 5: perform interleaving of lists TO DO
 			ArrayList<Integer> balancedList = balancedInterleave(sortedList, exploratoryList);
 
 			//step 6-8: assuming click model on first ten entries, get labeled triples
@@ -108,6 +108,7 @@ public class Listwise {
 			
 			//select the correct complete list, based on the balancedList output (or a boolean list analyzer from that)
 			ArrayList<Integer> nextList = new ArrayList<Integer>();
+			//some means of selecting here (balancedList output, perhaps?)
 			
 			if(nextList == exploratoryList)
 				if(previousWeights.size()>=20)
