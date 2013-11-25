@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Random;
 
 
@@ -60,22 +61,42 @@ public class ClickModel {
 		
 		
 		if(rel){
-			int val=(int)Math.ceil(1.0/cR);
-			int q1=p1.nextInt(val);
-			int q2=p2.nextInt(val);
-			if(q1==q2)
-				return true;
-			else
+			int val=(int)Math.floor(cR*100);
+			HashSet<Integer> forbidden=new HashSet<Integer>();
+			int count=0;
+			while(count<100-val){
+				int q1=p1.nextInt(100);
+				if(!forbidden.contains(q1)){
+					forbidden.add(q1);
+					count++;
+				}
+					
+			}
+			
+			int q2=p2.nextInt(100);
+			if(forbidden.contains(q2))
 				return false;
+			else
+				return true;
 		}
 		else{
-			int val=(int)Math.ceil(1.0/cNR);
-			int q1=p1.nextInt(val);
-			int q2=p2.nextInt(val);
-			if(q1==q2)
-				return true;
-			else
+			int val=(int)Math.floor(cNR*100);
+			HashSet<Integer> forbidden=new HashSet<Integer>();
+			int count=0;
+			while(count<100-val){
+				int q1=p1.nextInt(100);
+				if(!forbidden.contains(q1)){
+					forbidden.add(q1);
+					count++;
+				}
+					
+			}
+			
+			int q2=p2.nextInt(100);
+			if(forbidden.contains(q2))
 				return false;
+			else
+				return true;
 		}
 	}
 	
@@ -97,23 +118,52 @@ public class ClickModel {
 		
 		
 		if(rel){
-			int val=(int)Math.ceil(1.0/sR);
-			int q1=p1.nextInt(val);
-			int q2=p2.nextInt(val);
-			if(q1==q2)
-				return true;
-			else
+			int val=(int)Math.floor(sR*100);
+			HashSet<Integer> forbidden=new HashSet<Integer>();
+			int count=0;
+			while(count<100-val){
+				int q1=p1.nextInt(100);
+				if(!forbidden.contains(q1)){
+					forbidden.add(q1);
+					count++;
+				}
+					
+			}
+			
+			int q2=p2.nextInt(100);
+			if(forbidden.contains(q2))
 				return false;
+			else
+				return true;
 		}
 		else{
-			int val=(int)Math.ceil(1.0/sNR);
-			int q1=p1.nextInt(val);
-			int q2=p2.nextInt(val);
-			if(q1==q2)
-				return true;
-			else
+			int val=(int)Math.floor(sNR*100);
+			HashSet<Integer> forbidden=new HashSet<Integer>();
+			int count=0;
+			while(count<100-val){
+				int q1=p1.nextInt(100);
+				if(!forbidden.contains(q1)){
+					forbidden.add(q1);
+					count++;
+				}
+					
+			}
+			
+			int q2=p2.nextInt(100);
+			if(forbidden.contains(q2))
 				return false;
+			else
+				return true;
 		}
+	}
+	
+	public static void main(String[] args){
+		ClickModel c=new ClickModel("informational");
+		double tcount=0.0;
+		for(int i=0; i<100000; i++)
+			if(c.clicks(true))
+				tcount++;
+		System.out.println(tcount/100000+" "+c.cR);
 	}
 
 }

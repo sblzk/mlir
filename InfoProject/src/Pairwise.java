@@ -19,6 +19,15 @@ public class Pairwise {
 		
 	}
 	
+	//assumes default featsize 50
+	public Pairwise(){
+		eta=0.05;
+		lambda=0.0;
+		weight=new ArrayList<Double>();
+		for(int i=0; i<5; i++)
+			weight.add((double)i);
+	}
+	
 	public void setParameters(double eta, double lambda, ArrayList<Double> weight){
 		this.eta=eta;
 		this.lambda=lambda;
@@ -83,6 +92,7 @@ public class Pairwise {
 			if(computeDotProduct(diff)<1.0)
 				nextweight=sumVectors(weight,MultMinus(diff,null,eta),MultMinus(weight,null,-1.0*eta*lambda));
 			
+			
 		}
 		weight=new ArrayList<Double>(nextweight);
 	}
@@ -112,6 +122,7 @@ public class Pairwise {
 		return result;
 	}
 	
+	//computes either (f1-f2)mult or f1mult
 	private ArrayList<Double> MultMinus(ArrayList<Double> f1, ArrayList<Double> f2, double mult){
 		ArrayList<Double> result=new ArrayList<Double>(f1);
 		
@@ -147,4 +158,40 @@ public class Pairwise {
 		}
 		return result;
 	}
+	
+	//will generate integers cast as doubles: used for testing
+	private static ArrayList<Integer> generateIntegerVector(int size){
+		ArrayList<Integer> m=new ArrayList<Integer>();
+		for(int i=0; i<size; i++){
+			
+			m.add(i);
+		}
+		return m;
+	}
+	
+	//will generate integers cast as doubles: used for testing
+		private static ArrayList<Double> generateDoubleVector(int size){
+			ArrayList<Double> m=new ArrayList<Double>();
+			for(int i=0; i<size; i++){
+				Random p=new Random();
+				m.add((double)p.nextInt(size));
+			}
+			return m;
+		}
+	
+	//lets test
+	public static void main(String[] args){
+		
+		Pairwise p=new Pairwise();
+		ArrayList<Integer> a=generateIntegerVector(10);
+		System.out.println(a);
+		boolean[] click={true,true,false,true,false,false,false,true,false,true};
+		ArrayList<SimpleTriple> b=p.getImplicitFeedback(click,a);
+		for(int i=0; i<b.size(); i++)
+			System.out.println(b.get(i).x1+" "+b.get(i).x2+" "+b.get(i).y);
+		
+		
+		
+	}
 }
+

@@ -39,7 +39,7 @@ public class Metrics {
 			idcg+=(ideal.get(i)*1.0/(Math.log(i+1)/Math.log(2)));
 		
 		if(idcg==0.0)
-			return 0.0;
+			return 1.0;
 		else
 			return dcg/idcg;
 					
@@ -59,7 +59,7 @@ public class Metrics {
 				psum+=(sum(relevance,i+1)*1.0/sum(ideal,i+1));
 			}
 		if(rcount==0)
-			return 0;
+			return 1;
 		else
 			return psum/rcount;
 		
@@ -74,7 +74,7 @@ public class Metrics {
 		int isum=sum(ideal,k);
 		int dsum=sum(relevance,k);
 		if(isum==0)
-			return 0.0;
+			return 1.0;
 		else
 			return dsum*1.0/isum;
 		
