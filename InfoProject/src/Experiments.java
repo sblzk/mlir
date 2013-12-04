@@ -27,7 +27,7 @@ public class Experiments {
 		
 		HashSet<Integer> queries=new HashSet<Integer>(data.queryMap.keySet());
 		for(int query: queries){
-			ArrayList<Integer> rankedList=p.returnRankedList(query);		//here?
+			ArrayList<Integer> rankedList=p.returnRankedList(query);
 			Metrics m=new Metrics(data,query,rankedList);
 			ndcg+=m.NDCG(10);
 			precision+=m.Precision(10);
@@ -45,9 +45,9 @@ public class Experiments {
 		QRels data=new QRels(inputfile);
 		ClickModel click=new ClickModel("perfect");
 		int featsize=44;
-		Listwise l=new Listwise(data,featsize,click);						//need
+		Listwise l=new Listwise(data,featsize,click);
 		System.out.println(l.weight);
-		l.runBaseline();													//need
+		l.runBaseline();
 		System.out.println(l.weight);
 		
 		double ndcg=0;
@@ -56,7 +56,7 @@ public class Experiments {
 		
 		HashSet<Integer> queries=new HashSet<Integer>(data.queryMap.keySet());
 		for(int query: queries){
-			ArrayList<Integer> rankedList=l.returnRankedList(query);
+			ArrayList<Integer> rankedList=l.returnRankedList(query, l.weight);
 			Metrics m=new Metrics(data,query,rankedList);
 			ndcg+=m.NDCG(10);
 			precision+=m.Precision(10);
