@@ -7,6 +7,7 @@ public class Pairwise {
 	private double lambda;
 	ArrayList<Double> weight;
 	ClickModel click;
+	double r;
 	
 	public Pairwise(QRels data, int featsize, ClickModel click){
 		this.data=data;
@@ -19,9 +20,22 @@ public class Pairwise {
 		
 	}
 	
-	//assumes default featsize 50
-	public Pairwise(){
+	//r is 1-epsilon. r=0 is purely exploitative
+	public Pairwise(QRels data, int featsize, ClickModel click, double r){
+		this.data=data;
+		this.click=click;
 		eta=0.05;
+		lambda=0.0;
+		weight=new ArrayList<Double>();
+		for(int i=0; i<featsize; i++)
+			weight.add(0.0);
+		this.r=r;
+		
+	}
+	
+	//assumes default featsize 5
+	public Pairwise(){
+		eta=0.001;
 		lambda=0.0;
 		weight=new ArrayList<Double>();
 		for(int i=0; i<5; i++)
@@ -37,7 +51,11 @@ public class Pairwise {
 	//weight will get updated after all queries are run. Please refer to Hoffman for pseudocode of steps
 	public void runBaseline(){
 		//step 2: outer for loop
+		int iterationcount=data.queryMap.keySet().size();
+		iterationcount=1000/iterationcount;
+		do{
 		for(int query:data.queryMap.keySet()){
+			
 			HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
 			//steps 3-4: extract scores
 			for(SimplePair qdoc:data.queryMap.get(query)){
@@ -58,7 +76,7 @@ public class Pairwise {
 			}
 			
 			ArrayList<SimpleTriple> training=getImplicitFeedback(clicks,sortedList);
-			System.out.println(training.size());
+			//System.out.println(training.size());
 			
 			//steps 9-11: update the weight vector
 			if(training.size()==0)
@@ -66,9 +84,142 @@ public class Pairwise {
 			updateWeightVector(training, query);
 		
 		}
+		iterationcount--;
+		}while(iterationcount>0);
+		
 		//step 12 not explicit: the final weight vector should be in 'weight'
 	}
 	
+	//weight will get updated after all queries are run. Please refer to Hoffman for pseudocode of steps
+	public void runEpsilonGreedy(){
+		//step 2: outer for loop
+		int iterationcount=data.queryMap.keySet().size();
+		//iterationcount=1000/iterationcount;
+		//do{
+		for(int query:data.queryMap.keySet()){
+			
+			HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
+			//steps 3-4: extract scores
+			for(SimplePair qdoc:data.queryMap.get(query)){
+				if(!scores.containsKey(computeDotProduct(data.featureMap.get(qdoc))))
+					scores.put(computeDotProduct(data.featureMap.get(qdoc)),new HashSet<Integer>());
+				scores.get(computeDotProduct(data.featureMap.get(qdoc))).add(qdoc.getItem2());
+			}
+			//step 5: sort entire list: this is where the difference between all the algorithms come in
+			ArrayList<Integer> exploitList=constructFullSortedList(scores);
+			ArrayList<Integer> sortedList=new ArrayList<Integer>();
+			
+			int iter=0;
+			int exploit=0;
+			while(iter<10){
+				if(isExploratory()){
+					Random k=new Random(4324324+iter+iterationcount);
+					int m=k.nextInt(exploitList.size());
+					while(sortedList.contains(exploitList.get(m)))
+						m=k.nextInt(exploitList.size());
+					
+					sortedList.add(exploitList.get(m));	
+				}
+				else{
+					while(sortedList.contains(exploitList.get(exploit)))
+						exploit++;
+					sortedList.add(exploitList.get(exploit));
+				}
+				
+				iter++;
+			}
+			
+			//step 6-8: assuming click model on first ten entries, get labeled triples
+			boolean[] clicks=new boolean[10];
+			for(int i=0; i<10; i++){
+				boolean rel=false;
+				if(data.relevanceMap.get(new SimplePair(query,(int)sortedList.get(i)))>0)
+					rel=true;
+				clicks[i]=click.clicks(rel);
+			}
+			
+			ArrayList<SimpleTriple> training=getImplicitFeedback(clicks,sortedList);
+			//System.out.println(training.size());
+			
+			//steps 9-11: update the weight vector
+			if(training.size()==0)
+				continue;
+			updateWeightVector(training, query);
+		
+		}
+		//iterationcount--;
+		//}while(iterationcount>0);
+		
+		//step 12 not explicit: the final weight vector should be in 'weight'
+	}
+	
+	//weight will get updated after all queries are run. Please refer to Hoffman for pseudocode of steps
+		public void runRLAL(){
+			//step 2: outer for loop
+			//int iterationcount=data.queryMap.keySet().size();
+			//iterationcount=1000/iterationcount;
+			//do{
+			for(int query:data.queryMap.keySet()){
+				
+				HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
+				//steps 3-4: extract scores
+				for(SimplePair qdoc:data.queryMap.get(query)){
+					if(!scores.containsKey(computeDotProduct(data.featureMap.get(qdoc))))
+						scores.put(computeDotProduct(data.featureMap.get(qdoc)),new HashSet<Integer>());
+					scores.get(computeDotProduct(data.featureMap.get(qdoc))).add(qdoc.getItem2());
+				}
+				//step 5: sort entire list: this is where the difference between all the algorithms come in
+				ArrayList<Integer> exploitList=constructFullSortedList(scores);
+				ArrayList<Integer> exploreList=getActiveLearningVector(exploitList);
+				ArrayList<Integer> sortedList=new ArrayList<Integer>();
+				
+				int iter=0;
+				int exploit=0;
+				int explore=0;
+				while(iter<10){
+					if(isExploratory()){
+						
+						while(sortedList.contains(exploreList.get(explore)))
+							explore++;
+						
+						
+						
+						sortedList.add(exploreList.get(explore));	
+					}
+					else{
+						while(sortedList.contains(exploitList.get(exploit)))
+							exploit++;
+						sortedList.add(exploitList.get(exploit));
+					}
+					
+					iter++;
+				}
+				
+				//step 6-8: assuming click model on first ten entries, get labeled triples
+				boolean[] clicks=new boolean[10];
+				for(int i=0; i<10; i++){
+					boolean rel=false;
+					if(data.relevanceMap.get(new SimplePair(query,(int)sortedList.get(i)))>0)
+						rel=true;
+					clicks[i]=click.clicks(rel);
+				}
+				
+				ArrayList<SimpleTriple> training=getImplicitFeedback(clicks,sortedList);
+				//System.out.println(training.size());
+				
+				//steps 9-11: update the weight vector
+				if(training.size()==0)
+					continue;
+				updateWeightVector(training, query);
+			
+			}
+			//iterationcount--;
+			//}while(iterationcount>0);
+			
+			//step 12 not explicit: the final weight vector should be in 'weight'
+		}
+
+
 	//will use current weight to return a ranked list for this query
 	public ArrayList<Integer> returnRankedList(int query){
 		HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>();
@@ -81,6 +232,60 @@ public class Pairwise {
 		
 		return constructFullSortedList(scores);
 	}
+	
+	private boolean isExploratory(){
+		
+			if(r==1.0)
+				return true;
+			else if(r==0.0)
+				return false;
+			
+			Random p1=new Random((new Random()).nextInt());
+			Random p2=new Random((new Random()).nextInt());
+			
+			
+			
+				int val=(int)Math.floor(r*100);
+				HashSet<Integer> forbidden=new HashSet<Integer>();
+				int count=0;
+				while(count<100-val){
+					int q1=p1.nextInt(100);
+					if(!forbidden.contains(q1)){
+						forbidden.add(q1);
+						count++;
+					}
+						
+				}
+				
+				int q2=p2.nextInt(100);
+				if(forbidden.contains(q2))
+					return false;
+				else
+					return true;
+			
+			
+		}
+	
+	private ArrayList<Integer> getActiveLearningVector(ArrayList<Integer> sortedList){
+		ArrayList<Integer> result=new ArrayList<Integer>();
+		if(sortedList==null||sortedList.size()==0)
+			return null;
+		int middle=sortedList.size()/2;
+		int i=1;
+		result.add(sortedList.get(middle));
+		while(true){
+			if(middle-i<0)
+				break;
+			result.add(sortedList.get(middle-i));
+			if(middle+i>=sortedList.size())
+				break;
+			result.add(sortedList.get(middle+i));
+			i++;
+		}
+		
+		return result;
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	private void updateWeightVector(ArrayList<SimpleTriple> training, int query){
@@ -111,6 +316,8 @@ public class Pairwise {
 		return result;
 	}
 	
+	
+	
 	//with current weight vector
 	private double computeDotProduct(ArrayList<Double> array){
 		double result=0.0;
@@ -135,7 +342,7 @@ public class Pairwise {
 	}
 	
 	
-	private ArrayList<Double> sumVectors(ArrayList<Double>...vectors){
+	private ArrayList<Double> sumVectors(@SuppressWarnings("unchecked") ArrayList<Double>...vectors){
 		ArrayList<Double> result=new ArrayList<Double>();
 		
 		for(int i=0; i<vectors[0].size(); i++){
@@ -170,6 +377,7 @@ public class Pairwise {
 	}
 	
 	//will generate integers cast as doubles: used for testing
+		@SuppressWarnings("unused")
 		private static ArrayList<Double> generateDoubleVector(int size){
 			ArrayList<Double> m=new ArrayList<Double>();
 			for(int i=0; i<size; i++){

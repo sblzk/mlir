@@ -9,6 +9,9 @@ public class Metrics {
 	
 	ArrayList<Integer> relevance;
 	
+	public Metrics(){
+		
+	}
 	
 	public Metrics(QRels data, int qid, ArrayList<Integer> rankedList){
 		this.data=data;
@@ -97,6 +100,28 @@ public class Metrics {
 		for(int i=p.size()-1; i>=p.size()-k; i--)
 			result.add(p.get(i));
 		return result;
+	}
+	
+	private ArrayList<Integer> generate(int q, int range){
+		ArrayList<Integer> result=new ArrayList<Integer>();
+		
+		int iterations=0;
+		while(iterations<q){
+			int k=(new Random(234234+iterations)).nextInt(range);
+			result.add(k);
+			
+			iterations++;
+		}
+		return result;
+	}
+	
+	public static void main(String[] args){
+		Metrics a=new Metrics();
+		
+		ArrayList<Integer> orig=a.generate(5,15);
+		System.out.println(orig);
+		System.out.println(a.sum(orig,-1));
+		System.out.println(a.sum(orig,2));
 	}
 
 }
