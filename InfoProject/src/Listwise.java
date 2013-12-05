@@ -96,12 +96,12 @@ public class Listwise {
 			List<Integer> probabilisticListValues = new ArrayList<Integer>(probabilisticList.values()); 
 			List<String> probabilisticListKeys = new ArrayList<String>(probabilisticList.keySet());
 			
-			//step 6-8: assuming click model on first ten entries, get labeled triples
+			//step 6-8: assuming click model on first 20 entries, get labeled triples
 			//
 			//NOTE: This STILL must also be done for probabilistic interleave.
 			//the below code is only functional for balanced interleave.
 			//
-			boolean[] clicks=new boolean[10];
+			boolean[] clicks=new boolean[20];
 			for(int i=0; i<balancedListValues.size(); i++){
 				boolean rel=false;
 				if(data.relevanceMap.get(new SimplePair(query,(int)balancedListValues.get(i)))>0)
