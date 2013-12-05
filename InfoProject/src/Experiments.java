@@ -175,7 +175,7 @@ public class Experiments {
 	}
 	
 	
-	public static void runFullListwiseBaseline(String inputfile)throws IOException{
+	public static void runFullListwiseBaseline(String inputfile)throws IOException{		//needs editing!
 		QRels data=new QRels(inputfile);
 		ClickModel click=new ClickModel("perfect");
 		int featsize=44;
@@ -190,7 +190,7 @@ public class Experiments {
 		
 		HashSet<Integer> queries=new HashSet<Integer>(data.queryMap.keySet());
 		for(int query: queries){
-			ArrayList<Integer> rankedList=l.returnRankedList(query, l.weight);
+			ArrayList<Integer> rankedList=l.returnRankedList(query, l.weight);	//is this what is needed here?
 			Metrics m=new Metrics(data,query,rankedList);
 			ndcg+=m.NDCG(10);
 			precision+=m.Precision(10);
@@ -203,5 +203,7 @@ public class Experiments {
 		System.out.printf("NDCG@10: %f  Precision@10:  %f  MAP:  %f",ndcg,precision,ap);
 		
 	}
+	
+	
 
 }
