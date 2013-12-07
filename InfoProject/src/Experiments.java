@@ -12,7 +12,7 @@ public class Experiments {
 		runFullPairwiseBaseline(44,"perfect",defaultpath+
 				"/host/TREC/TD2004/Data/Fold1/trainingset.txt",
 				defaultpath+"/host/TREC/TD2004/Data/All/TD2004.txt");
-		runBalancedMA(44,"perfect",
+		runProbabilisticListwiseBaseline(44,"perfect",
 				"./host/TREC/TD2004/Data/Fold1/trainingset.txt",
 				"./host/TREC/TD2004/Data/All/TD2004.txt");
 	}
