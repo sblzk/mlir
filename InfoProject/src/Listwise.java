@@ -27,6 +27,7 @@ public class Listwise {
 		unitvector=new ArrayList<Double>();
 		for(int i=0; i<featsize; i++)
 			unitvector.add(0.0);
+		previousWeights = new ArrayList<ArrayList<Double>>();
 		
 	}
 	
@@ -113,6 +114,10 @@ public class Listwise {
 	
 	public void runProbabilisticBaseline(){
 		//step 2: outer for loop
+		//step 2: outer for loop
+		int iterationcount=data.queryMap.keySet().size();
+		iterationcount=1000/iterationcount;
+		do{
 		for(int query:data.queryMap.keySet()){
 			HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
 			HashMap<Double,HashSet<Integer>> exploratoryscores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
@@ -129,7 +134,7 @@ public class Listwise {
 			}
 			Double weight2norm = Math.sqrt(sum(weight3));
 			for(int i=0; i<unitvector.size(); i++){
-				Double weight2val = Math.max(sum(weight), 1)*weight2.get(i)/weight2norm;
+				Double weight2val = weight2.get(i)/weight2norm;
 				weight2.set(i, weight2val);
 			}
 			
@@ -167,10 +172,16 @@ public class Listwise {
 			else if(listsClicks.get(1) > listsClicks.get(0))
 				updateWeightVector(query, weight2, weight);
 		}
+		iterationcount--;
+		}while(iterationcount>0);
+		
 	}
 	
 	public void runBalancedMA(){
 		//step 2: outer for loop
+		int iterationcount=data.queryMap.keySet().size();
+		iterationcount=1000/iterationcount;
+		do{
 		for(int query:data.queryMap.keySet()){
 			HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
 			HashMap<Double,HashSet<Integer>> exploratoryscores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
@@ -180,8 +191,13 @@ public class Listwise {
 			unitvector = getUnifRandUnitVector(unitvector);
 			
 			//step 4: set w'_t = w_t + delta*unitvector
+			if(previousWeights.size()==0){
+				for(int i=0; i<unitvector.size(); i++){
+				weight2.add(weight.get(i) + delta*unitvector.get(i));
+				}
+			}else{
 			weight2 = movingAverage(weight, unitvector, previousWeights, delta, sigma);
-			
+			}
 			//step 4.a1: extract scores for weight
 			for(SimplePair qdoc:data.queryMap.get(query)){
 				if(!scores.containsKey(computeDotProduct(data.featureMap.get(qdoc), weight)))
@@ -217,10 +233,16 @@ public class Listwise {
 			
 			updatePreviousWeights(weight2, listsClicks, previousWeights);
 		}
+		iterationcount--;
+		}while(iterationcount>0);
+		
 	}
 	
 	public void runBalancedMMA(){
 		//step 2: outer for loop
+		int iterationcount=data.queryMap.keySet().size();
+		iterationcount=1000/iterationcount;
+		do{
 		for(int query:data.queryMap.keySet()){
 			HashMap<Double,HashSet<Integer>> scores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
 			HashMap<Double,HashSet<Integer>> exploratoryscores=new HashMap<Double,HashSet<Integer>>(); //for this query and weight, scores hashed to docid set
@@ -278,6 +300,9 @@ public class Listwise {
 			}		
 			updatePreviousWeights(weight2, listsClicks, previousWeights);
 		}
+		iterationcount--;
+		}while(iterationcount>0);
+		
 	}
 	
 	public void updatePreviousWeights(List<Double> weight2, ArrayList<Integer> listsClicks, ArrayList<ArrayList<Double>> previousWeights){
@@ -292,14 +317,11 @@ public class Listwise {
 		ArrayList<Double> previousNonNormalizedWeights = new ArrayList<Double>();
 		//step 4: set w'_t = w_t + delta*unitvector
 		for(int i=0; i<unitvector.size(); i++){
-			if(previousWeights.size()>0){
+
 													//					sum(each column) / size(each column)								+	(coefficient) UnifRandUnitVector
 				previousNonNormalizedWeights.set(i, sum(listTranspose(previousWeights).get(i))/(listTranspose(previousWeights).get(i).size()) + sigma*unitvector.get(i));
 				Double lag = Math.sqrt(sum(previousNonNormalizedWeights));
 				weight2.add(weight.get(i)+previousNonNormalizedWeights.get(i)/lag);
-			}else{
-				weight2.add(weight.get(i) + delta*unitvector.get(i));
-			}
 		}
 		for(int i=0; i<unitvector.size(); i++){
 			Double mag = Math.sqrt(sum(weight2)); //the normalization constant
