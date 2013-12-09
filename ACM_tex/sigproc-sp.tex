@@ -60,50 +60,6 @@ In this paper, we propose the following contributions. Note that specific milest
 For pairwise learning, what if the $\epsilon$-greedy random selection strategy of Hofmann et al. \cite{hofmann} actually works better than, or at least as well as, the \emph{active learning} exploratory document selection criterion? Similarly, for listwise learning, what if the original dueling bandit gradient descent algorithm outperforms our modified approach? Either result would ostensibly argue against the assumed advantages of active learning and non-random exploratory document or list selection, and if we encounter either, we will run additional experiments with controlled modifications to our original active learning algorithms in order to identify and report on the factors that counter our hypothesis.\\ \\
 Another issue could be that results are inconsistent or inconclusive across different experiments, which could prevent us from making firm conclusions regarding our findings. We use the cumulative NDCG metric to score our runs and perform basic descriptive statistical techniques such as student's \emph{t} test to compare against baseline scores. If significance is not established in all experiments in a manner consistent with our hypothesis, then we must investigate the factors that may have made our hypothesis incorrect or difficult to test. In particular, finding unexpected differences between our listwise and pairwise algorithms' performance would require further investigation and,  potentially, modification of one or both algorithms. It is a common adage that more data can always improve a learning model. However, several datasets are poorly formatted or otherwise unsuitable for our task. In addition, due to time constraints we limit our datasets to the TREC 2003 and 2004 tracks of LETOR 2.0 \footnote{http://research.microsoft.com/en-us/um/beijing/projects/letor/Letor2.0/dataset.aspx}. These datasets from Microsoft are designed to facilitate research in learning to rank. Therefore, our datasets limit the generalizability of our findings as they did in the work by Hofmann et al. \cite{hofmann}.
 
-\section{Milestones}
-{\bf For October 31, 2013:}\\ \\
-(1) We will construct the stochastic gradient descent algorithm for pairwise feedback and pairwise learning used in the work by Hofmann et al. \cite{hofmann}.\\
-(2) We will construct the $\epsilon$-greedy algorithm for exploratory and exploitative document selection as used in the work by Hofmann et al. \cite{hofmann}.\\
-(3) We will construct the active learning procedure for exploratory and exploitative document selection so we can run controlled experiments.\\
-(4) We will construct the bootstrapping procedure for exploratory and exploitative document selection so we can run controlled experiments.\\
-(5) We will construct the NDCG code for model performance evaluation.\\
-(6) We will perform the pairwise learning experiments and examine the NDCG scores for all approaches and using different parameter values on each dataset. We will compare scores using descriptive statistics. \\ \\
-{\bf For November 14, 2013:} \\ \\
-(7) We will construct the dueling bandit gradient descent code for the listwise learning procedure used in \cite{hofmann}.\\
-(8) We will construct the balanced interleave method for list comparison used in the work by Hofmann et al. \cite{hofmann}.\\
-(9) We will construct the dueling bandit gradient descent algorithm for listwise selection with modified (active learning-inspired) exploratory list production.\\
-(10) We will construct the probabilistic interleave method for list comparison used in the work by Hofmann et al. \cite{hofmann}.\\
-(11) We will perform the listwise learning experiments and examine the NDCG scores for all experiments and for different parameter values on each dataset. We will compare scores using descriptive statistics.  \\ \\
-{\bf For November 21, 2013:}\\ \\
-(12) Additional evaluation metrics and methods may or may not be explored, time permitting. \\
-(13) We will plot our data to illustrate the differences between our findings and those of Hofmann et al. \cite{hofmann}.\\
-(14) We will analyze and make conclusions based on our findings.\\
-(15) We will draft our final paper.\\ \\
-{\bf For December 4, 2013:}\\ \\
-(16) We will complete our final paper.\\
-(17) We will build a poster that includes:
-\begin{itemize}
-\item A Summary
-\item Description of Relevant Techniques and Methods (Stochastic Gradient Descent,$\epsilon$-greedy, active learning, bootstrapping).
-\item Hypotheses statements
-\item Snippets of code
-\item Graphics showing the NDCG and statistical significance of the active learning and bootstrapping (for pairwise learning) methods vs. the $\epsilon$-greedy methods.
-\item Conclusions
-\end{itemize}
-\subsection{Division of Work}
-Both authors will jointly design algorithm implementations for:
-\begin{itemize}
-\item Stochastic Gradient Descent
-\item $\epsilon$-greedy Exploratory and Exploitative Document Selection
-\item Active Learning Exploratory and Exploitative Document Selection
-\item Bootstrapping Exploratory and Exploitative Document Selection
-\item Dueling Bandit Gradient Descent
-\item Dueling Bandit Gradient Descent with Modified Exploratory List Generation
-\item Balanced Interleave Method for List Comparison
-\item Probabilistic Interleave Method for List Comparison
-\end{itemize}
-Both authors will jointly perform the experiments, self-delegating as computation and time allow. They will modularly develop code to perform the NDCG calculations and descriptive statistical tests, and generate the relevant plots. Finally, they will write about the findings as a class paper.
-
 \section{Current Progress}
 In this section, we list our current progress per the milestones above. 
 
@@ -162,9 +118,36 @@ We have succeeded in locating and parsing the datasets we intended to work on (L
 There are three algorithms that were supposed to be implemented for the pairwise case of implicit feedback. These, respectively, were the baseline case where the weight vector is learned offline using stochastic gradient descent, a click model and feedback \cite{joachims}, the baseline case supplemented to be online in a reinforcement learning framework as proposed originally in \cite{hofmann} and our proposed approach where we supplement the exploration phase of the reinforcement learning in the previous case with active learning. \\ \\
 We have succeeded in setting up the code infrastructure for all three algorithms and initial tests show promising evidence that the baseline case is working, at least on the perfect click model. Our numbers look reasonable but more testing will be required to see if subtle bugs are present in the code. We are currently in the process of doing so.
 
-\subsubsection{Immediate Goals}
+\section{Experiments}
+The experimental results reveal many notable trends.  We discuss findings along different metrics and click models separately.
 
-The immediate goals on this front are to ensure that the pairwise algorithm above is absolutely correct on the baseline. The initial numbers do look promising but we will run more experiments to ensure everything is correct before moving forwards. Logically, the design of the other two algorithms (one is in the Hofmann paper) has already been decided, so it is a matter of implementing them and collecting data comparing all three versions of the algorithm. 
+\subsection{Pairwise Algorithms}
+\subsubsection{Perfect Click Model}
+For the perfect click model, the baseline model is outperformed by both the reinforcement learning model and the active learning model for NDCG@10, Precision@10, and Mean Average Precision (MAP) for both the TD2003 and the TD2004 datasets.  In terms of MAP measurements, the baseline was outperformed not only by both of the other models, but also at every level of r for the TD2004 dataset, and by most values of r for the TD2003 dataset.  \\ \\
+In the TD2004 dataset, the highest overall values for every metric came from the reinforcement learning model with r=1 (purely exploratory).  This is consistent with the NDCG@10 and Precision@10 measurements for TD2003 as well, but not with the MAP values, where the active learning model outperformed the reinforcement model for values of r=0.6 and higher.  The single highest MAP value for the TD2003 experiments comes from the active learning model at r=1.   \\ \\
+Looking at both learning models, 9 of the 12 perfect click model metrics have maxima at r=1, where exploration is maximized.  This is inconsistent with the findings of Hofmann et al [cite], whose best performance on TD2003 and TD2004 is achieved when minimizing exploration.  \\ \\
+
+\subsubsection{Navigational Click Model}
+The navigational click model provided slightly worse results than those of the perfect click model.  This is consistent with the findings of previous Learning to Rank literature [cite Hofmann et al].\\
+Interestingly, when using the navigational click model, the reinforcement learning model performed best at a balanced value of exploration (r=0.4), rather than at an extreme, for all metrics of both TD2003 and TD2004 except for Precision@10 in TD2003, where the best performance was found at r=1.  The active learning model, by comparison, had more scattered maxima:  for TD2004, performance in terms of NDCG@10 and Precision@10 was best at r=1, MAP was best at r=0.2; for TD2003, all models performed best at r=0.6.   The active learning outperformed the reinforcement learning model in terms of both NDCG@10 and MAP when tested using TD2003, and also bested the MAP and Precision@10 scores of the reinforcement learning model when tested using TD2004.  \\ \\
+Overall, the active learning model appeared to show greater improvement over the reinforcement learning model when applying the navigational click model than when applying the perfect click model. 
+
+\subsubsection{Informational Click Model}
+The informational click model’s experimental results are roughly comparable to those of the navigational click model, and slightly worse than the perfect click model.  However, the informational click model’s best results have the greatest variance in values of r between the three metrics and two datasets.   \\ \\
+For the TD2003 dataset, the reinforcement learning model maximizes NDCG@10 and Precision@10 values at r=0.4 and maximized MAP at r=0.2.  The active learning model maximizes performance for NDCG@10 and MAP at r=0.4 and Precision@10 for r=0.2.  These findings suggest a balanced exploration/exploitation approach is best for TD2003, which is generally consistent with Hofmann et al [cite].  The active learning model outperforms the reinforcement learning model in terms of both NDCG@10 and Precision@10, but not MAP. \\ \\
+For the TD2004 dataset, the reinforcement learning model outperforms the active learning model for all metrics.  The reinforcement learning model performs best when totally exploratory for NDCG@10 and Precision@10, and totally exploitative for MAP.  The active learning model performs best when totally exploitative for NDCG@10 and Precision@10, and highly exploratory (r=0.8) for MAP.   
+
+\subsection{Listwise Algorithm}
+The Listwise baseline experiment provided measurements slightly higher than those of the Pairwise experiments.  This is consistent with Hofmann et al [cite].  However, the moving average experiment was not able to improve on this baseline for any test, metric, dataset, or fold.  \\ \\
+There are several possible explanations for this.  One is that the datasets are not large enough to evaluate the differences between the listwise algorithms, which do not gather information directly from particular documents and, as a result, may struggle to effectively improve the ranking weight.  In addition, as previously mentioned the TD* datasets are sparse in terms of relevant documents for each query: in general, fewer than five percent of documents were found to be relevant.  These two factors may have made the updating process ineffective for a majority of queries; indeed, in our baseline experiment the exploratory list scored more highly than the exploitative list three times in a thousand iterations. \\ \\
+In addition, the moving average approach carries several operational risks.  Chief among them, it may overemphasize improvements to the ranking weight vector by both updating it according to a successful exploratory weight and by factoring previously successful exploratory weights into the generation of new exploratory weights.  This effectively counts such weights “twice” when generating a new exploratory weight, and may lead the weight vector to overcompensate after successful explorations.  \\ \\
+Although the experiment did not improve on the current listwise learning to rank algorithm, due to its structure and the difficulty of updating the ranking weight in an intelligent and automated manner, there are very few known approaches to the task.  As such, the fact that our approach was unsuccessful may be helpful to scholars seeking to avoid “dead ends” in future research endeavors in this area. 
+
+\section{Analysis}
+In general, our findings confirm that both learning methods are able to perform higher than the baseline, and support the emphasis of exploration over exploitation.  This second finding is in contrast to the findings of Hofmann et al [cite], whose results were higher for reinforcement learning models that favored exploitation over exploration, or a near-even balance of the two, for all click models, and especially for the perfect click model. \\ \\
+The perfect click model is the least noisy of the click models, yet exploration is most reliably high here, which seems contradictory.  However, it bears noting that both of the TD* datasets are low-relevance datasets – they have very few relevant documents for each query.  This may overemphasize the benefits of exploration as well as the superiority of both models to the baseline, as the benefits of exploration are more apparent when the target relevant documents are sparsely distributed (an exploitative algorithm is likely to have more trouble finding them).  Results may have differed for datasets with a greater proportion of relevant documents to irrelevant documents for each query.  \\ \\
+In addition, the reinforcement learning model appears to dominate the active learning model when using a perfect click model, but the reverse is true of the navigational click model, and the models are competitive when using the informational click model.  This may be due to the increased noise of the informational and navigational models over the perfect click model, which, coupled with the sparseness of relevant documents for each query, allows active learning to gain information more effectively by targeting noisy documents to a greater extent than in the reinforcement learning approach, which randomly targets exploratory documents.   \\ \\
+
 
 \bibliographystyle{abbrv}
 \bibliography{sigproc-sp}  % sigproc.bib is the name of the Bibliography in this case

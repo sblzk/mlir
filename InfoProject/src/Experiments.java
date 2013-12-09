@@ -5,8 +5,8 @@ import java.io.*;
 //use this class for running detailed experiments. Keep all methods static
 public class Experiments {
 
-	static String defaultpath="/home/mayankkejriwal/IR/mlir/InfoProject/src";
-	//static String defaultpath="./";
+	//static String defaultpath="/home/mayankkejriwal/IR/mlir/InfoProject/src";
+	static String defaultpath="./";
 	
 	public static void main(String[] args)throws IOException {
 		/*
@@ -19,10 +19,12 @@ public class Experiments {
 	*/
 		
 		ArrayList<double[][]> res=PairwiseExperimentsTREC(defaultpath+
-				"/host/TREC/TD2004/Data/Fold1/trainingset.txt",
+				"/host/TREC/TD2003/Data/Fold5/trainingset.txt",
 				defaultpath+
-				"/host/TREC/TD2004/Data/Fold1/testset.txt");
+				"/host/TREC/TD2003/Data/Fold5/testset.txt");
 		printResults(res.get(0));
+		printResults(res.get(1));
+		printResults(res.get(2));
 	
 	}
 	
@@ -54,11 +56,11 @@ public class Experiments {
 		 clickmodel="navigational";
 			double[][] nav=new double[3][13];
 			base=returnFullPairwiseBaseline(44,clickmodel,trainfile,testfile);
-			fillColumn(perfect,base,0);
+			fillColumn(nav,base,0);
 			i=1;
 			 for(double r=0.0; r<=1.0; r+=0.2){
-				 fillColumn(perfect,returnFullPairwiseReinforcement(r,44,clickmodel,trainfile,testfile),i);
-				 fillColumn(perfect,returnFullPairwiseRLAL(r,44,clickmodel,trainfile,testfile),i+6);
+				 fillColumn(nav,returnFullPairwiseReinforcement(r,44,clickmodel,trainfile,testfile),i);
+				 fillColumn(nav,returnFullPairwiseRLAL(r,44,clickmodel,trainfile,testfile),i+6);
 				 i++;
 			 }
 			 results.add(nav);
@@ -66,11 +68,11 @@ public class Experiments {
 			 clickmodel="informational";
 				double[][] info=new double[3][13];
 				base=returnFullPairwiseBaseline(44,clickmodel,trainfile,testfile);
-				fillColumn(perfect,base,0);
+				fillColumn(info,base,0);
 				 i=1;
 				 for(double r=0.0; r<=1.0; r+=0.2){
-					 fillColumn(perfect,returnFullPairwiseReinforcement(r,44,clickmodel,trainfile,testfile),i);
-					 fillColumn(perfect,returnFullPairwiseRLAL(r,44,clickmodel,trainfile,testfile),i+6);
+					 fillColumn(info,returnFullPairwiseReinforcement(r,44,clickmodel,trainfile,testfile),i);
+					 fillColumn(info,returnFullPairwiseRLAL(r,44,clickmodel,trainfile,testfile),i+6);
 					 i++;
 				 }
 				 results.add(info);
