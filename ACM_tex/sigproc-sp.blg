@@ -1,12 +1,19 @@
-This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: sigproc-sp.aux
+Case mismatch error between cite keys Joachims and joachims
+---line 41 of file sigproc-sp.aux
+ : \citation{Joachims
+ :                   }
+I'm skipping whatever remains of this command
 The style file: abbrv.bst
 Database file #1: sigproc-sp.bib
+Warning--I didn't find a database entry for "zhang"
 Warning--can't use both volume and number fields in broder
 Warning--can't use both volume and number fields in rl
 You've used 9 entries,
             2118 wiz_defined-function locations,
-            551 strings with 5310 characters,
+            552 strings with 5315 characters,
 and the built_in function-call counts, 3971 in all, are:
 = -- 416
 > -- 155
@@ -45,4 +52,4 @@ warning$ -- 2
 while$ -- 41
 width$ -- 10
 write$ -- 109
-(There were 2 warnings)
+(There was 1 error message)
