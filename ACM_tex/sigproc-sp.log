@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  9 DEC 2013 22:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  9 DEC 2013 22:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -352,259 +352,280 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-
-LaTeX Warning: Citation `zhang' on page \thepage  undefined on input line 47.
-
-
-Overfull \hbox (1.16115pt too wide) in paragraph at lines 47--49
-[]\T1/aer/m/it/9 Learning from im-plicit feed-back\T1/aer/m/n/9 : The work by J
-oachims
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 47--49
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 54--59
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--59
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--59
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--59
+Overfull \hbox (6.93312pt too wide) in paragraph at lines 45--53
+\T1/aer/m/n/9 tu-itively, the pa-ram-e-ter $\OT1/cmr/m/n/9 0\OML/cmm/m/it/9 :\O
+T1/cmr/m/n/9 0 \OMS/cmsy/m/n/9 ^^T \OML/cmm/m/it/9 ^^O \OMS/cmsy/m/n/9 ^^T \OT1
+/cmr/m/n/9 1\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 0$ \T1/aer/m/n/9 con-trols the expl
+oration-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--59
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--62
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 [][]\T1/aer/m/n/9 http://research.microsoft.com/en-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--63
+Underfull \hbox (badness 10000) in paragraph at lines 59--61
 
  []
 
 
-Overfull \hbox (18.86009pt too wide) in paragraph at lines 70--78
+Overfull \hbox (18.86009pt too wide) in paragraph at lines 68--76
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--108
+Underfull \hbox (badness 10000) in paragraph at lines 77--106
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \vbox (badness 1325) has occurred while \output is active []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--125
+Underfull \hbox (badness 10000) in paragraph at lines 117--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
-
- []
-
-
-LaTeX Warning: Citation `Joachims' on page \thepage  undefined on input line 15
-6.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--159
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--159
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--159
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--159
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 165--168
+
+LaTeX Warning: Citation `Joachims' on page \thepage  undefined on input line 15
+2.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--168
+Underfull \hbox (badness 10000) in paragraph at lines 152--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--168
+Underfull \hbox (badness 10000) in paragraph at lines 152--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--168
+Underfull \hbox (badness 10000) in paragraph at lines 152--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \vbox (badness 1629) has occurred while \output is active []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--164
 
  []
 
 
-Overfull \hbox (4.33621pt too wide) in paragraph at lines 175--178
+Underfull \hbox (badness 10000) in paragraph at lines 161--164
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--164
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--164
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--169
+
+ []
+
+[5]
+Overfull \hbox (4.33621pt too wide) in paragraph at lines 171--174
 \T1/aer/m/n/9 the in-for-ma-tional click mod-el’s best re-sults have the grea
 t-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--178
+Underfull \hbox (badness 10000) in paragraph at lines 171--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--178
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 180--184
+Underfull \hbox (badness 10000) in paragraph at lines 171--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 180--184
+Underfull \hbox (badness 10000) in paragraph at lines 176--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 180--184
+Underfull \hbox (badness 10000) in paragraph at lines 176--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--189
+Underfull \hbox (badness 10000) in paragraph at lines 176--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--189
+Underfull \hbox (badness 10000) in paragraph at lines 182--185
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--189
+Underfull \hbox (badness 10000) in paragraph at lines 182--185
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--189
+Underfull \hbox (badness 10000) in paragraph at lines 182--185
 
  []
 
-(./sigproc-sp.bbl) [6] (./sigproc-sp.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--185
+
+ []
+
+(./sigproc-sp.bbl [6]) [7
+
+] (./sigproc-sp.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3104 strings out of 493315
- 39528 string characters out of 6137904
- 114771 words of memory out of 5000000
- 6469 multiletter control sequences out of 15000+600000
+ 3106 strings out of 493315
+ 39543 string characters out of 6137904
+ 116783 words of memory out of 5000000
+ 6471 multiletter control sequences out of 15000+600000
  50604 words of font info for 68 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 41i,10n,28p,1576b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,10n,28p,1570b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/tex
 live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texli
 ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/20
 13/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2013/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2013/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2013/texm
-f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/
-fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/t
-ype1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/t
-imes/utmri8a.pfb>
-Output written on sigproc-sp.pdf (6 pages, 165568 bytes).
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2013/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2013/texmf-
+dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fo
+nts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
+e1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/tim
+es/utmri8a.pfb>
+Output written on sigproc-sp.pdf (7 pages, 174816 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

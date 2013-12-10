@@ -37,6 +37,15 @@
   organization={ACM}
 }
 
+@inproceedings{zhang,
+ title={Solving large scale linear prediction problems using stochastic gradient descent algorithms},
+  author={Zhang, Tong},
+  booktitle={Proceedings of the international conference on Machine learning},
+  pages={116+},
+  year={2004},
+  organization={ACM}
+}
+
 @inproceedings{taylor,
   title={Softrank: optimizing non-smooth rank metrics},
   author={Taylor, Michael and Guiver, John and Robertson, Stephen and Minka, Tom},

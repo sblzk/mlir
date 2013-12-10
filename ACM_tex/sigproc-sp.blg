@@ -2,54 +2,72 @@ This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: sigproc-sp.aux
 Case mismatch error between cite keys Joachims and joachims
----line 41 of file sigproc-sp.aux
+---line 57 of file sigproc-sp.aux
  : \citation{Joachims
  :                   }
 I'm skipping whatever remains of this command
 The style file: abbrv.bst
 Database file #1: sigproc-sp.bib
-Warning--I didn't find a database entry for "zhang"
+I was expecting a `,' or a `}'---line 51 of file sigproc-sp.bib
+ :   
+ :   booktitle={Proceedings of the international conference on Machine learning},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Too many commas in name 1 of "Langford, J., Strehl, A., & Wortman, J." for entry langford
+while executing---line 1049 of file abbrv.bst
+Too many commas in name 1 of "Langford, J., Strehl, A., & Wortman, J." for entry langford
+while executing---line 1049 of file abbrv.bst
+Too many commas in name 1 of "Langford, J., Strehl, A., & Wortman, J." for entry langford
+while executing---line 1049 of file abbrv.bst
 Warning--can't use both volume and number fields in broder
+Too many commas in name 1 of "Langford, J., Strehl, A., & Wortman, J." for entry langford
+while executing---line 1090 of file abbrv.bst
+Too many commas in name 1 of "Langford, J., Strehl, A., & Wortman, J." for entry langford
+while executing---line 1090 of file abbrv.bst
+Too many commas in name 1 of "Langford, J., Strehl, A., & Wortman, J." for entry langford
+while executing---line 1090 of file abbrv.bst
+Warning--empty booktitle in langford
+Warning--empty year in langford
 Warning--can't use both volume and number fields in rl
-You've used 9 entries,
+You've used 12 entries,
             2118 wiz_defined-function locations,
-            552 strings with 5315 characters,
-and the built_in function-call counts, 3971 in all, are:
-= -- 416
-> -- 155
-< -- 9
-+ -- 62
-- -- 52
-* -- 255
-:= -- 594
-add.period$ -- 34
-call.type$ -- 9
-change.case$ -- 52
+            564 strings with 5688 characters,
+and the built_in function-call counts, 5102 in all, are:
+= -- 536
+> -- 182
+< -- 11
++ -- 73
+- -- 60
+* -- 311
+:= -- 754
+add.period$ -- 44
+call.type$ -- 12
+change.case$ -- 65
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 177
-empty$ -- 324
-format.name$ -- 52
-if$ -- 897
+cite$ -- 16
+duplicate$ -- 238
+empty$ -- 432
+format.name$ -- 60
+if$ -- 1163
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 10
-newline$ -- 48
-num.names$ -- 18
-pop$ -- 72
+int.to.str$ -- 12
+missing$ -- 13
+newline$ -- 62
+num.names$ -- 24
+pop$ -- 98
 preamble$ -- 1
-purify$ -- 44
+purify$ -- 54
 quote$ -- 0
-skip$ -- 131
+skip$ -- 176
 stack$ -- 0
-substring$ -- 260
-swap$ -- 74
-text.length$ -- 9
+substring$ -- 338
+swap$ -- 99
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 34
-warning$ -- 2
-while$ -- 41
-width$ -- 10
-write$ -- 109
-(There was 1 error message)
+type$ -- 46
+warning$ -- 4
+while$ -- 53
+width$ -- 14
+write$ -- 140
+(There were 8 error messages)
