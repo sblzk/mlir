@@ -1,0 +1,63 @@
+@article{hofmann,
+  title={Balancing exploration and exploitation in listwise and pairwise online learning to rank for information retrieval},
+  author={Hofmann, Katja and Whiteson, Shimon and de Rijke, Maarten},
+  journal={Information Retrieval},
+  volume={16},
+  number={1},
+  pages={63--90},
+  year={2013},
+  publisher={Springer}
+}
+
+
+@book{rl,
+  title={Reinforcement learning: An introduction},
+  author={Sutton, Richard S and Barto, Andrew G},
+  volume={1},
+  number={1},
+  year={1998},
+  publisher={Cambridge Univ Press}
+}
+
+@inproceedings{aibo,
+  title={Active learning to maximize accuracy vs. effort in interactive information retrieval},
+  author={Tian, Aibo and Lease, Matthew},
+  booktitle={Proceedings of the 34th international ACM SIGIR conference on Research and development in Information Retrieval},
+  pages={145--154},
+  year={2011},
+  organization={ACM}
+}
+
+@inproceedings{joachims,
+  title={Optimizing search engines using clickthrough data},
+  author={Joachims, Thorsten},
+  booktitle={Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining},
+  pages={133--142},
+  year={2002},
+  organization={ACM}
+}
+
+@inproceedings{zhang,
+ title={Solving large scale linear prediction problems using stochastic gradient descent algorithms},
+  author={Zhang, Tong},
+  booktitle={Proceedings of the international conference on Machine learning},
+  pages={116+},
+  year={2004},
+  organization={ACM}
+}
+
+@inproceedings{taylor,
+  title={Softrank: optimizing non-smooth rank metrics},
+  author={Taylor, Michael and Guiver, John and Robertson, Stephen and Minka, Tom},
+  booktitle={Proceedings of the international conference on Web search and web data mining},
+  pages={77--86},
+  year={2008},
+  organization={ACM}
+}
+
+
+
+
+
+
+
