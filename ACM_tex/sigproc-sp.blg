@@ -1,5 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2013)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: sigproc-sp.aux
 Case mismatch error between cite keys Joachims and joachims
 ---line 57 of file sigproc-sp.aux
@@ -29,45 +28,45 @@ while executing---line 1090 of file abbrv.bst
 Warning--empty booktitle in langford
 Warning--empty year in langford
 Warning--can't use both volume and number fields in rl
-You've used 12 entries,
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            564 strings with 5688 characters,
-and the built_in function-call counts, 5102 in all, are:
-= -- 536
-> -- 182
-< -- 11
-+ -- 73
-- -- 60
-* -- 311
-:= -- 754
-add.period$ -- 44
-call.type$ -- 12
-change.case$ -- 65
+            571 strings with 5884 characters,
+and the built_in function-call counts, 5542 in all, are:
+= -- 586
+> -- 189
+< -- 13
++ -- 76
+- -- 62
+* -- 335
+:= -- 813
+add.period$ -- 48
+call.type$ -- 13
+change.case$ -- 69
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 238
-empty$ -- 432
-format.name$ -- 60
-if$ -- 1163
+cite$ -- 17
+duplicate$ -- 261
+empty$ -- 473
+format.name$ -- 62
+if$ -- 1269
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 13
-newline$ -- 62
-num.names$ -- 24
-pop$ -- 98
+int.to.str$ -- 13
+missing$ -- 14
+newline$ -- 67
+num.names$ -- 26
+pop$ -- 104
 preamble$ -- 1
-purify$ -- 54
+purify$ -- 57
 quote$ -- 0
-skip$ -- 176
+skip$ -- 195
 stack$ -- 0
-substring$ -- 338
-swap$ -- 99
-text.length$ -- 11
+substring$ -- 375
+swap$ -- 111
+text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 46
+type$ -- 50
 warning$ -- 4
-while$ -- 53
-width$ -- 14
-write$ -- 140
+while$ -- 58
+width$ -- 15
+write$ -- 153
 (There were 8 error messages)

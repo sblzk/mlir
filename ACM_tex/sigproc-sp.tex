@@ -27,7 +27,7 @@ Sam Blazek\\
 
 \maketitle
 \begin{abstract}
-As the development of effective and efficient information retrieval systems relies increasingly on automated techniques, ranking procedures based on machine learning methods have drawn much attention. \emph{Online learning to rank} algorithms permit retrieval systems to learn directly from live user activity, but offer several challenges. Most importantly, the system must learn from the user without interfering with his or her search activities and decreasing user satisfaction. This requires a balanced approach to both experimentation and tuning (\emph{exploration}) and service provision (\emph{exploitation}). We examine recent applications of \emph{reinforcement learning} in \emph{listwise} and \emph{pairwise} approaches to learning to rank, and prototype and evaluate new \emph{active learning} and \emph{bootstrapping} strategies in which ranked results presented to the user are tailored to gather more valuable information with less interference with users' retrieval activities. Our hypothesis is that this reduces the amount of exploration required to produce results of equivalent quality to previous reinforcement learning implementations. We empirically investigate this hypothesis using a recently developed online simulation framework.
+As the development of effective and efficient information retrieval systems relies increasingly on automated techniques, ranking procedures based on machine learning methods have drawn much attention. \emph{Online learning to rank} algorithms permit retrieval systems to learn directly from live user activity, but offer several challenges. Most importantly, the system must learn from the user without interfering with his or her search activities and decreasing user satisfaction. This requires a balanced approach to both experimentation and tuning (\emph{exploration}) and service provision (\emph{exploitation}). We examine recent applications of \emph{reinforcement learning} in \emph{listwise} and \emph{pairwise} approaches to learning to rank, and prototype and evaluate new \emph{active learning} strategies in which ranked results presented to the user are tailored to gather more valuable information with less interference with users' retrieval activities. Our hypothesis is that this reduces the amount of exploration required to produce results of equivalent quality to previous reinforcement learning implementations. We empirically investigate this hypothesis using a recently developed online simulation framework.
 \end{abstract}
 
 
@@ -40,7 +40,7 @@ In the framework of reinforcement learning \cite{rl}, such systems that are cons
 Reinforcement learning is a very general formulation that is well suited to many different tasks and domains. In information retrieval, exploring the solution space amounts to presenting documents to users for which the system has no score or judgement. Exploitation in information retrieval amounts to always retrieving and displaying those documents for which the system has a high score. If the system is perfect or an oracle, then pure exploitation is obviously the strategy of choice. In practice, this is not the case. The parameters of the system overfit on the limited data available to the system. Because of this, they are not useful for judging parts of the solution space about which they have no feedback. In a recent work, Hofmann et al. showed that striking a correct balance between exploration and exploitation is the strategy of choice for maximizing long term returns \cite{hofmann}. For the exploration part of the system, their model was \emph{random}. That is, the system explored by sampling documents from the entire set randomly and presenting to the user for feedback. \\ \\
 In a separate, earlier work, Tian and Lease showed that active learning approaches can be useful for efficiently reducing uncertainty about the solution space \cite{aibo}. The benefits of active learning have also been demonstrated in other domains, and corroborated by other researchers in the information retrieval community as well \cite{active2}. The idea is to explore the unknown solution space \emph{intelligently} by presenting only those examples to users that are expected to maximize information gain. \\ \\
 In this work, we propose to combine the benefits of both reinforcement learning and of active learning \emph{within} the exploratory aspect of reinforcement learning. In other words, rather than doing random exploration, we use an active learning approach. \\ \\
-We also demonstrate the effects of bootstrapping an online system, and the susceptibility of the system to bootstrapping noise. By bootstrapping, we mean that we train the initial parameters of the online system by exposing a small set of documents and relevance labels rather than starting with randomly generated initial parameters. In this paradigm, we are investigating the benefits of offline learning that precedes the online phase. We test the hypothesis that even very limited bootstrapping can drastically impact the convergence properties of online algorithms in the reinforcement learning framework. 
+We do this by exploiting the fact that the ranking algorithms rely on \emph{stochastic gradient descent} \cite{stochastic}. This algorithm uses a weight vector, and computes the dot product of the weight vector with the feature vector extracted from the query and document to determine which documents have the higher score given that query. In a purely exploitative approach, the documents that would have the highest score would be displayed to the user while the documents with the lowest score would be considered non-relevant and discarded. On the other hand, in a purely exploratory approach, the documents would be displayed randomly. Instead, by using the reinforcement learning framework where we try to balance both exploration and exploitation, we take a middle ground. Moreover, since we are also using active learning, we explore not by picking randomly but by picking those documents that stochastic gradient classifies as the most ambiguous. In other words, they fall somewhere in the middle of the score range and we cannot tell if they are the most relevant or non-relevant. By presenting these documents to the user and getting feedback, we are assured of maximal information gain. In this way, we use active learning to quickly converge to a correct weight vector for a user, within a reinforcement learning paradigm. To the best of our knowledge, we are the first to combine these two methods in an IR framework. 
 \section{Related Work}
 Although our primary contributions (subsequently detailed) are original, there is some work that forms a precedent for ours. We list the main components of our research, and describe the focal work that biased us towards using or investigating those components:\\ \\
 \emph{Learning from implicit feedback}: The work by Joachims \cite{joachims} addressed the problem of using clickthrough data to train a system. The system used in that work was a Support Vector Machine (SVM). Building on this work, several others have showed that it is possible to learn reliably in an online framework i. e. from implicit feedback. Just like in the work by Hofmann et al. \cite{hofmann}, we adopt the basic pairwise approach in this work.  In a similar vein as Hofmann et al. \cite{hofmann}, we also use a listwise algorithm. Our focal work for a listwise algorithmic approach is the SoftRank system by Taylor et al. \cite{taylor}. \\ \\
@@ -54,7 +54,7 @@ We are not aware of any works before Hofmann et al. \cite{hofmann} that use rigo
 In this paper, we propose the following contributions. Note that specific milestones and additional details are provided in a subsequent section. In this section, we merely aim to enumerate our high level goals for the final deliverables.\\ \\
 We construct an implementation of an \emph{online} pairwise ranking algorithm, with user activity simulated using click models. The pairwise algorithm relies on implicit feedback, similar to the approach by Joachims \cite{joachims}. However, the pairwise ranking algorithm is set in a reinforcement learning framework \cite{rl}, shown to be an effective way of balancing exploration and exploitation in a recent work by Hofmann et al. \cite{hofmann}. Our original contribution is to place the \emph{exploration} part of the setting in an active learning framework, instead of choosing documents randomly (as in \cite{hofmann}). In a series of experiments, Tian and Lease showed that active learning can be highly efficient with respect to minimizing user labeling effort in information retrieval \cite{aibo}. We are currently not aware of any work (in information retrieval) that attempts to combine the benefits of both reinforcement learning and active learning. \\ \\
 We also repeat the above experiments for a \emph{listwise} ranking algorithm (also online). An example of a listwise ranking algorithm, called SoftRank, is presented by Taylor et al. \cite{taylor}. Again, rather than using random measures for the exploration part of reinforcement learning, we intelligently choose the space that we want to explore.  Listwise ranking algorithms in a learning to rank setting still rely upon the testing of random ranking weight deviations to produce new weights.  Our method decreases the amount of randomness and incorporates previously successful weight vectors into the calculation of exploratory weights.\\ \\
-We study the effects of limited supervised bootstrapping for the above approaches. A key observation upon surveying the current literature was that many authors tended to either adopt a supervised approach (i.e. an offline training and validation phase) or an approach that started with parameters that were random but that converged to acceptable values as more feedback was elicited from the user. For example, Hofmann et al. started with random, normalized weight vectors for their reinforcement learning algorithms and updated these vectors as implicit feedback was obtained \cite{hofmann}. Tian and Lease effectively do something similar, but in an active learning setting \cite{aibo}. However, we would like to consider a compromise, based on practical needs. Specifically, we propose a \emph{bootstrapping} phase before the online learning. Our hypothesis is that even if we generate our parameters (like the weight vector) based initially on a small set of training samples, and then use those parameters to start off the online session, we will witness considerable gains. An important related question is: how much bootstrapping is required, and is the system robust to noise in that phase? One key contribution of this paper is to begin to answer some of these questions for the algorithms and settings above.  
+Perhaps our main contribution is that we are proposing a novel way of learning to rank by bringing in and combining two active areas of research that have shown great promise in other domains. We believe that with this work we have only touched the tip of the iceberg and that by using more sophisticated reinforcement learning and active learning significant gains can be exploited. 
 \section{Risks}
 For pairwise learning, what if the $\epsilon$-greedy random selection strategy of Hofmann et al. \cite{hofmann} actually works better than, or at least as well as, the \emph{active learning} exploratory document selection criterion? Similarly, for listwise learning, what if the original dueling bandit gradient descent algorithm outperforms our modified approach? Either result would ostensibly argue against the assumed advantages of active learning and non-random exploratory document or list selection, and if we encounter either, it will be necessary to run additional experiments with controlled modifications to our original active learning algorithms in order to identify and subsequently report on the factors that counter our hypothesis.\\ \\
 Another issue could be that results are inconsistent or inconclusive across different experiments, which could prevent us from making firm conclusions regarding our findings. We use the cumulative NDCG metric to score our runs and perform basic descriptive statistical techniques such as student's \emph{t} test to compare against baseline scores. If significance is not established in all experiments in a manner consistent with our hypothesis, then we must investigate the factors that may have made our hypothesis incorrect or difficult to test. In particular, finding unexpected differences between our listwise and pairwise algorithms' performance would require further investigation and,  potentially, modification of one or both algorithms. It is a common adage that more data can always improve a learning model. However, several datasets are poorly formatted or otherwise unsuitable for our task. In addition, due to time constraints we limit our datasets to the TREC 2003 and 2004 tracks of LETOR 2.0 \footnote{http://research.microsoft.com/en-us/um/beijing/projects/letor/Letor2.0/dataset.aspx}. These datasets from Microsoft are designed to facilitate research in learning to rank. Therefore, our datasets limit the generalizability of our findings as they did in the work by Hofmann et al. \cite{hofmann}.
@@ -115,11 +115,105 @@ We have succeeded in locating and parsing the datasets we intended to work on (L
 \subsection{Pairwise Algorithms}
 
 We implemented three algorithms for the pairwise case of implicit feedback. These, respectively, were the baseline case where the weight vector is learned offline using stochastic gradient descent, a click model and feedback \cite{joachims}, the baseline case supplemented to be online in a reinforcement learning framework as proposed originally in \cite{hofmann} and our proposed approach where we supplement the exploration phase of the reinforcement learning in the previous case with active learning. \\ \\
-\\ \\
-\\ \\
-MORE NEEDED HERE FROM MAYANK RE: PAIRWISE
-\\ \\
- \\ \\
+We reproduce the baseline algorithm in Algorithm \ref{baseline} since that gives us a starting point with which to explain the other two algorithms (reinforcement and reinforcement+active). The baseline algorithm takes in a list of documents, and two parameters $\eta$ and $\lambda$ and an initial weight vector $w_0$. It computes the score by taking the dot product of the \emph{current} weight vector with the \emph{feature} vector generated using the document and query vectors, and sorts the resulting list of documents in descending order of scores. It then takes the top ten documents and presents it to the user. Based on users' actual interactions or the click model deployed, it observes the clicks and generates pairwise labels from it. In this sense, it is obtaining implicit feedback which could be noisy if users have clicked on the wrong or irrelevant documents. After cycling through the queries, we get back a final weight vector that should be used henceforth for future queries.\\ \\
+For the reinforcement learning algorithm of Hofmann et al. \cite{hofmann}, instead of simply displaying the sorted list (a purely exploitative approach), the algorithm constructs the list (call it $I'$) as follows: it constructs the list $I$ and picks the first unpicked element from I with probability $\epsilon$. With probability $1-\epsilon$ it picks an element randomly from the entire space of documents.\\ \\
+Our contribution is to replace this random exploration with active learning. We do this by constructing two lists $I$ and $I'$ and constructing the final list by picking with probability $\epsilon$ the first unpicked element from $I$ and with probability $1-\epsilon$ from $I'$. The list $I$ is simply the list of documents ranked according to the score, same as $I$ in the algorithm shown, and also in the reinforcement learning version. For the reinforcement learning version note that $I'$ is simply the complete list of documents, randomly ordered. For our approach, however, the list of documents $I'$ is not randomly ranked. Instead, we construct it by taking the list $I$ and pivoting it about the center. We then alternate back and forth. For example, the first element of $I'$ is the \emph{middle} element in $I$. The second element is one element \emph{before} the middle, and the third element is one element \emph{after} the middle. The fourth element is two elements before the middle and so on. The specific algorithms for constructing lists $I$ for both these variants is shown in Algorithms \ref{reinforce} and \ref{reinforceActive}. Note that these algorithms would be called (with the feature vectors $X$ and the current weight vector $w$ as input instead of taking the first ten documents of $L$ as the pairwise baseline does. By substituting those lines in the pairwise baseline, in fact, we get the reinforcement and reinforcement+active learning algorithms precisely. For succinctness, therefore, we do not show the pseudocode of these algorithms separately.  \\ \\
+The reason why this conforms to an active learning paradigm is because in a ranked list, the middle documents are the most ambiguous. The last ones may be assumed to be reasonably non-relevant (according to the current weight vector) while the first ones will be highly scored and probably relevant. The middle ones are those about which we have little to no information. In this way, by not picking random elements but those which will presumably maximize our information gain, we enhance the original reinforcement learning approach applied to this problem by \cite{hofmann}.  
+
+\begin{algorithm}[t]
+\caption{Pairwise Baseline}
+\begin{spacing}{0.9}
+\begin{algorithmic}
+\STATE \textbf{Input :} \begin{itemize}
+\item Document set D
+\item Parameters $\eta$, $\lambda$
+\item Initial weight vector $w_0$
+ \end{itemize}
+\STATE \textbf{Output :} \begin{itemize}
+\item Final weight vector $w$
+ \end{itemize}
+\STATE \textbf{Method :}
+\begin{enumerate}
+\FORALL{Query $q_t, t=(1 \ldots T)$ }
+\STATE{$X=\phi(D|q_t)$}
+\STATE{$S=w_{t-1}^TX$}
+\STATE{$L=sortDescendingByScore(D,S)$}
+\STATE{$I=L[1:10]$}
+\STATE{Display I and observe clicked elements C}
+\STATE{Construct all labeled pairs $P=(x_a,x_b,y)$ from I and C}
+\FORALL{i in $(1\ldots P)$}
+\IF{$y_iw_{t-1}^T(x_{a_i}-x_{b_i})<1.0$ and $y_i \neq 0.0$}
+\STATE{Update $w_t$ as: $w_t=w_{t-1}+\eta y_i(x_{a_i}-x_{b_i})-\eta \lambda w_{t-1}$}
+\ENDIF
+\ENDFOR
+\ENDFOR
+\RETURN $w$
+\end{enumerate}
+\end{algorithmic}
+\end{spacing}
+\label{baseline}
+\end{algorithm}
+
+
+\begin{algorithm}[t]
+\caption{Constructing $I$ for reinforcement learning}
+\begin{spacing}{0.9}
+\begin{algorithmic}
+\STATE \textbf{Input :} \begin{itemize}
+\item Query-Document Feature Vectors $X$
+\item Current Weight Vector $w$
+\item Parameter $\epsilon$
+ \end{itemize}
+\STATE \textbf{Output :} \begin{itemize}
+\item List $I$ to display to user
+ \end{itemize}
+\STATE \textbf{Method :}
+\begin{enumerate}
+\STATE{$S=w_{t-1}^TX$}
+\STATE{$I'=sortDescendingByScore(D,S)$}
+\STATE{$I''=Randomize(I')$}
+\STATE{Initialize $I$ as empty}
+\WHILE{$|I| \neq |X|$}
+\STATE{With probability $\epsilon$ add first unpicked element from $I'$ to $I$}
+\STATE{With probability $1-\epsilon$ add first unpicked element from $I''$ to $I$}
+\ENDWHILE
+\STATE{Return $I$}
+\end{enumerate}
+\end{algorithmic}
+\end{spacing}
+\label{reinforce}
+\end{algorithm}
+
+
+\begin{algorithm}[t]
+\caption{Constructing $I$ for reinforcement+active learning}
+\begin{spacing}{0.9}
+\begin{algorithmic}
+\STATE \textbf{Input :} \begin{itemize}
+\item Query-Document Feature Vectors $X$
+\item Current Weight Vector $w$
+\item Parameter $\epsilon$
+ \end{itemize}
+\STATE \textbf{Output :} \begin{itemize}
+\item List $I$ to display to user
+ \end{itemize}
+\STATE \textbf{Method :}
+\begin{enumerate}
+\STATE{$S=w_{t-1}^TX$}
+\STATE{$I'=sortDescendingByScore(D,S)$}
+\STATE{Construct $I''$ by starting from the middle of $I'$ and alternating back and forth till the list is exhausted }
+\STATE{Initialize $I$ as empty}
+\WHILE{$|I| \neq |X|$}
+\STATE{With probability $\epsilon$ add first unpicked element from $I'$ to $I$}
+\STATE{With probability $1-\epsilon$ add first unpicked element from $I''$ to $I$}
+\ENDWHILE
+\STATE{Return $I$}
+\end{enumerate}
+\end{algorithmic}
+\end{spacing}
+\label{reinforceActive}
+\end{algorithm}
+
 
 \subsection{Listwise Algorithms}
 There are four algorithms that were supposed to be implemented for the listwise case of implicit feedback. The first is the baseline dueling bandit gradient descent algorithm for the listwise learning procedure used in \cite{hofmann}, which generates an exploitative list based on a current weight vector and an exploratory list based on a random deviation from the current weight vector with step size $\delta$.  These lists are combined using an $interleave$ algorithm, and then compared based on click data.  The combination and comparison steps are described as a function of the two original lists, $f(l1,l2)$. \\ \\
@@ -183,6 +277,14 @@ In general, our findings confirm that both learning methods are able to perform 
 The perfect click model is the least noisy of the click models, yet exploration is most reliably high here, which seems contradictory.  However, it bears noting that both of the $TD*$ datasets are low-relevance datasets; they have very few relevant documents for each query.  This may overemphasize the benefits of exploration as well as the superiority of both models to the baseline, as the benefits of exploration are more apparent when the target relevant documents are sparsely distributed (an exploitative algorithm is likely to have more trouble finding them).  Results may have differed for datasets with a greater proportion of relevant documents to irrelevant documents for each query.  \\ \\
 In addition, the reinforcement learning model appears to dominate the active learning model when using a perfect click model, but the reverse is true of the navigational click model, and the models are competitive when using the informational click model.  This may be due to the increased noise of the informational and navigational models over the perfect click model, which, coupled with the sparseness of relevant documents for each query, allows active learning to gain information more effectively by targeting noisy documents to a greater extent than in the reinforcement learning approach, which randomly targets exploratory documents.   \\ \\
 
+\section{Future Directions}
+
+We feel there are many directions for future work, and that we have merely scratched the surface. Reinforcement learning as a paradigm has been applied to information retrieval and learning to rank approaches only recently. We took the approach and enhanced it by replacing random exploration with active learning. However, we only enhanced the $\epsilon$-greedy algorithm. Reinforcement learning is an active area of research and many algorithms have been proposed \cite{rl} that could fit into an IR paradigm either in a standalone fashion, or better still, combined with an active learning approach to do intelligent exploration.\\ \\
+One particularly interesting avenue that poses unique challenges for information retrieval is the application of reinforcement learning and active learning techniques to listwise learning. We attempted a unique approach and detailed it in this work, but we weren't able to back up our approach empirically. The challenge is that listwise learning occurs at a granularity that is not amenable to active learning. However, we believe active learning in some form can still be applied to it and leave for future work to do so and demonstrate real empirical benefits. \\ \\
+  
+
+\section{Conclusion}
+In this paper, we proposed a framework for applying both reinforcement learning and active learning to obtain better learning to rank performance in an Information Retrieval paradigm. Our results are promising and show that intelligent exploration has benefits beyond random selection. Combined with the benefits of reinforcement learning, which have already been demonstrated in a prior work, our work shows that learning to rank can benefit from these other fields of machine learning that have also shown promise in other applications. We expect that more sophisticated reinforcement learning and active learning methods will drive up performance even further. 
 
 \bibliographystyle{abbrv}
 \bibliography{sigproc-sp}  % sigproc.bib is the name of the Bibliography in this case

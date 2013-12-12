@@ -9,7 +9,6 @@
   publisher={Springer}
 }
 
-
 @book{rl,
   title={Reinforcement learning: An introduction},
   author={Sutton, Richard S and Barto, Andrew G},
@@ -37,15 +36,6 @@
   organization={ACM}
 }
 
-@inproceedings{zhang,
- title={Solving large scale linear prediction problems using stochastic gradient descent algorithms},
-  author={Zhang, Tong},
-  booktitle={Proceedings of the international conference on Machine learning},
-  pages={116+},
-  year={2004},
-  organization={ACM}
-}
-
 @inproceedings{taylor,
   title={Softrank: optimizing non-smooth rank metrics},
   author={Taylor, Michael and Guiver, John and Robertson, Stephen and Minka, Tom},
@@ -54,6 +44,73 @@
   year={2008},
   organization={ACM}
 }
+
+@inproceedings{langford,
+  title={Exploration scavenging},
+  author={Langford, J., Strehl, A., & Wortman, J.}
+  booktitle={Proceedings of the international conference on Machine learning},
+  pages={528--535},
+  year={2008},
+  organization={ACM}
+}
+
+@incollection{active2,
+  title={Incorporating diversity and density in active learning for relevance feedback},
+  author={Xu, Zuobing and Akella, Ram and Zhang, Yi},
+  booktitle={Advances in Information Retrieval},
+  pages={246--257},
+  year={2007},
+  publisher={Springer}
+}
+
+@inproceedings{yue,
+  title={Interactively optimizing information retrieval systems as a dueling bandits problem},
+  author={Yue, Yisong and Joachims, Thorsten},
+  booktitle={Proceedings of the international conference on Machine learning},
+  pages={1201--1208},
+  year={2009},
+  organization={ACM}
+}
+
+@inproceedings{broder,
+  title={A taxonomy of web search},
+  author={Broder, Andrei},
+  booktitle={ACM Sigir forum},
+  volume={36},
+  number={2},
+  pages={3--10},
+  year={2002},
+  organization={ACM}
+}
+
+@inproceedings{guo1,
+  title={Click chain model in web search},
+  author={Guo, Fan and Liu, Chao and Kannan, Anitha and Minka, Tom and Taylor, Michael and Wang, Yi-Min and Faloutsos, Christos},
+  booktitle={Proceedings of the 18th international conference on World wide web},
+  pages={11--20},
+  year={2009},
+  organization={ACM}
+}
+
+@inproceedings{zhang,
+  title={Solving large scale linear prediction problems using stochastic gradient descent algorithms},
+  author={Zhang, Tong},
+  booktitle={Proceedings of the international conference on Machine learning},
+  pages={116--},
+  year={2004},
+  organization={ACM}
+}
+
+@inproceedings{guo2,
+  title={Efficient multiple-click models in web search},
+  author={Guo, Fan and Liu, Chao and Wang, Yi Min},
+  booktitle={Proceedings of the Second ACM International Conference on Web Search and Data Mining},
+  pages={124--131},
+  year={2009},
+  organization={ACM}
+}
+
+
 
 
 
