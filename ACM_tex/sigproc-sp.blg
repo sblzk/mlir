@@ -1,10 +1,5 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: sigproc-sp.aux
-Case mismatch error between cite keys Joachims and joachims
----line 57 of file sigproc-sp.aux
- : \citation{Joachims
- :                   }
-I'm skipping whatever remains of this command
 The style file: abbrv.bst
 Database file #1: sigproc-sp.bib
 I was expecting a `,' or a `}'---line 51 of file sigproc-sp.bib
@@ -69,4 +64,4 @@ warning$ -- 4
 while$ -- 58
 width$ -- 15
 write$ -- 153
-(There were 8 error messages)
+(There were 7 error messages)
